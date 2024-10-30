@@ -11,7 +11,7 @@ class JavalinConfig {
         val app = Javalin.create().apply {
             exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
             error(404) { ctx -> ctx.json("404 - Not Found") }
-        }.start(7001)
+        }.start(getRemoteAssignedPort())
 
         registerRoutes(app)
         return app
@@ -25,5 +25,11 @@ class JavalinConfig {
         app.get("/api/users/email/{email}", HealthTrackerController::getUserByEmail)
         app.delete("/api/users/remove-user/{user-id}", HealthTrackerController::deleteUserById)
         app.put("/api/users/{user-id}", HealthTrackerController::updateUser)
+    }
+    private fun getRemoteAssignedPort(): Int {
+        val remotePort = System.getenv("PORT")
+        return if (remotePort != null) {
+            Integer.parseInt(remotePort)
+        } else 7001
     }
 }
