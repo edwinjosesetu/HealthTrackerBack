@@ -4,6 +4,7 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ie.setu.utils.mapToUser
 
+
 class UserDAO {
 
     fun getAll() : ArrayList<User>{
@@ -16,7 +17,11 @@ class UserDAO {
     }
 
     fun findById(id: Int): User?{
-        return null
+        return transaction {
+            Users.selectAll().where { Users.id eq id }
+                .map{mapToUser(it)}
+                .firstOrNull()
+        }
     }
 
     fun save(user: User){
