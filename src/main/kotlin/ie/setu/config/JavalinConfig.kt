@@ -24,5 +24,6 @@ class JavalinConfig {
         app.post("/api/users/create-user", HealthTrackerController::addUser)
         app.get("/api/users/email/{email}", HealthTrackerController::getUserByEmail)
         app.delete("/api/users/remove-user/{user-id}", HealthTrackerController::deleteUserById)
+        app.put("/api/users/{user-id}", HealthTrackerController::updateUser)
     }
 }
