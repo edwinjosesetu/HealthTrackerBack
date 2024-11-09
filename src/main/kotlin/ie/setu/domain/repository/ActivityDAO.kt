@@ -4,6 +4,7 @@ import ie.setu.domain.Activity
 import ie.setu.domain.db.Activities
 import ie.setu.utils.mapToActivity
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class ActivityDAO {
@@ -46,6 +47,13 @@ class ActivityDAO {
                 it[calories] = activity.calories
                 it[userId] = activity.userId
             }
+        }
+    }
+
+    //Deleting activities by userid
+    fun deleteByUserId(userId: Int) {
+        transaction {
+            Activities.deleteWhere { Activities.userId eq userId }
         }
     }
 

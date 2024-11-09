@@ -34,6 +34,7 @@ class JavalinConfig {
         app.get("/api/activities", HealthTrackerController::getAllActivities)
         app.post("/api/add-activities", HealthTrackerController::addActivity)
         app.get("/api/users/{user-id}/activities", HealthTrackerController::getActivitiesByUserId)
+        app.delete("/api/users/{user-id}/activities",HealthTrackerController::deleteActivityByUserId)
     }
     private fun getRemoteAssignedPort(): Int {
         val remotePort = System.getenv("PORT")
