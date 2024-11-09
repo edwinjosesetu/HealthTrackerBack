@@ -3,6 +3,8 @@ import ie.setu.domain.db.Users
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ie.setu.utils.mapToUser
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+
 
 class UserDAO {
 
@@ -16,19 +18,43 @@ class UserDAO {
     }
 
     fun findById(id: Int): User?{
-        return null
+        return transaction {
+            Users.selectAll().where { Users.id eq id }
+                .map{mapToUser(it)}
+                .firstOrNull()
+        }
     }
 
     fun save(user: User){
+        transaction {
+            Users.insert {
+                it[name] = user.name
+                it[email] = user.email
+            }
+        }
     }
 
     fun findByEmail(email: String) :User?{
-        return null
+        return transaction {
+            Users.selectAll().where(Users.email.eq(email))
+                .map { mapToUser(it) }
+                .firstOrNull()
+        }
     }
 
-    fun deleteUserById(id: Int) {
+    fun deleteUserById(id: Int) :Int{
+        return transaction{
+            Users.deleteWhere{ Users.id eq id }
+        }
     }
 
     fun updateUser(id: Int, user: User){
+        transaction {
+            Users.update ({
+                Users.id eq id}) {
+                it[name] = user.name
+                it[email] = user.email
+            }
+        }
     }
 }
