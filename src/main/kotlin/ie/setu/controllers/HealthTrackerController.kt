@@ -96,4 +96,13 @@ object HealthTrackerController {
     fun deleteActivity(ctx: Context) {
         activityDAO.deleteByActivityId(ctx.pathParam("id").toInt())
     }
+
+    fun updateActivityById(ctx: Context) {
+        val mapper = jacksonObjectMapper()
+        val activityUpdates = mapper.readValue<Activity>(ctx.body())
+        activityDAO.updateActivity(
+            id = ctx.pathParam("id").toInt(),
+            activity = activityUpdates
+        )
+    }
 }

@@ -63,4 +63,17 @@ class ActivityDAO {
         }
     }
 
+    // Update an activity by ID
+    fun updateActivity(id: Int,activity: Activity) {
+        transaction {
+            Activities.update({ Activities.id eq activity.id }) {
+                it[description] = activity.description
+                it[duration] = activity.duration
+                it[started] = activity.started
+                it[calories] = activity.calories
+                it[userId] = activity.userId
+            }
+        }
+    }
+
 }
