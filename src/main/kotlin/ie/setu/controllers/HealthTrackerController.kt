@@ -13,6 +13,7 @@ import io.javalin.http.Context
 object HealthTrackerController {
 
     private val userDao = UserDAO()
+    private val activityDAO = ActivityDAO()
 
     fun getAllUsers(ctx: Context) {
         ctx.json(userDao.getAll())
@@ -76,7 +77,7 @@ object HealthTrackerController {
             }
         }
     }
-    private val activityDAO = ActivityDAO()
+
 
     fun addActivity(ctx: Context) {
         //mapper handles the serialisation of Joda date into a String.

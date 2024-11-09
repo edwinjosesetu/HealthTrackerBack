@@ -40,7 +40,7 @@ class ActivityDAO {
     fun save(activity: Activity) {
         transaction {
             Activities.insert {
-                it[descrption] = activity.description
+                it[description] = activity.description
                 it[duration] = activity.duration
                 it[started] = activity.started
                 it[calories] = activity.calories
@@ -48,4 +48,5 @@ class ActivityDAO {
             }
         }
     }
+
 }
