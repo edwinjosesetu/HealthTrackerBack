@@ -19,15 +19,6 @@ class ActivityDAO {
         return activitiesList
     }
 
-    //Find a specific activity by activity id
-    fun findByActivityId(id: Int): Activity? {
-        return transaction {
-            Activities.selectAll().where {
-                Activities.id eq id
-            }.map { mapToActivity(it) }.firstOrNull()
-        }
-    }
-
     //Find all activities for a specific user id
     fun findByUserId(userId: Int): List<Activity> {
         return transaction {
@@ -57,8 +48,8 @@ class ActivityDAO {
         }
     }
     //Deleting an activity
-    fun deleteByActivityId(id: Int) {
-        transaction {
+    fun deleteByActivityId(id: Int): Int {
+        return transaction {
             Activities.deleteWhere { Activities.id eq id }
         }
     }
@@ -66,7 +57,7 @@ class ActivityDAO {
     // Update an activity by ID
     fun updateActivity(id: Int,activity: Activity) {
         transaction {
-            Activities.update({ Activities.id eq activity.id }) {
+            Activities.update ({ Activities.id eq id }) {
                 it[description] = activity.description
                 it[duration] = activity.duration
                 it[started] = activity.started
@@ -76,4 +67,12 @@ class ActivityDAO {
         }
     }
 
+    //Find a specific activity by activity id
+    fun findByActivityId(id: Int): Activity? {
+        return transaction {
+            Activities.selectAll().where {
+                Activities.id eq id
+            }.map { mapToActivity(it) }.firstOrNull()
+        }
+    }
 }
