@@ -5,6 +5,8 @@ import ie.setu.utils.jsonObjectMapper
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.json.JavalinJackson
+import ie.setu.controllers.UserController
+import ie.setu.controllers.ActivityController
 
 class JavalinConfig {
 
