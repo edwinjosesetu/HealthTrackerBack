@@ -5,6 +5,8 @@ import ie.setu.utils.jsonObjectMapper
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.json.JavalinJackson
+import ie.setu.controllers.UserController
+import ie.setu.controllers.ActivityController
 
 class JavalinConfig {
 
@@ -34,7 +36,10 @@ class JavalinConfig {
         app.get("/api/activities", HealthTrackerController::getAllActivities)
         app.post("/api/add-activities", HealthTrackerController::addActivity)
         app.get("/api/users/{user-id}/activities", HealthTrackerController::getActivitiesByUserId)
-        app.delete("/api/users/{user-id}/activities",HealthTrackerController::deleteActivityByUserId)
+        app.delete("/api/users/{user-id}/remove-activities",HealthTrackerController::deleteActivityByUserId)
+        app.delete("/api/users/{id}/remove-activity", HealthTrackerController::deleteActivity)
+        app.put("/api/users/{id}/update-activity", HealthTrackerController::updateActivityById)
+        app.get("/api/users/{id}/get-activities", HealthTrackerController::getActivityById)
     }
     private fun getRemoteAssignedPort(): Int {
         val remotePort = System.getenv("PORT")

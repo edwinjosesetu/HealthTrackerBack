@@ -121,7 +121,6 @@
             <artifactId>exposed-jodatime</artifactId>
             <version>0.55.0</version>
         </dependency>
-
     </dependencies>
 
 
