@@ -1,6 +1,5 @@
 package ie.setu.config
 
-import ie.setu.controllers.HealthTrackerController
 import ie.setu.utils.jsonObjectMapper
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
@@ -26,20 +25,21 @@ class JavalinConfig {
     }
 
     private fun registerRoutes(app: Javalin) {
-//        get(HealthTrackerController::getAllUsers)
-        app.get("/api/users", HealthTrackerController::getAllUsers)
-        app.get("/api/users/{user-id}", HealthTrackerController::getUserByUserId)
-        app.post("/api/users/create-user", HealthTrackerController::addUser)
-        app.get("/api/users/email/{email}", HealthTrackerController::getUserByEmail)
-        app.delete("/api/users/remove-user/{user-id}", HealthTrackerController::deleteUserById)
-        app.put("/api/users/{user-id}", HealthTrackerController::updateUser)
-        app.get("/api/activities", HealthTrackerController::getAllActivities)
-        app.post("/api/add-activities", HealthTrackerController::addActivity)
-        app.get("/api/users/{user-id}/activities", HealthTrackerController::getActivitiesByUserId)
-        app.delete("/api/users/{user-id}/remove-activities",HealthTrackerController::deleteActivityByUserId)
-        app.delete("/api/users/{id}/remove-activity", HealthTrackerController::deleteActivity)
-        app.put("/api/users/{id}/update-activity", HealthTrackerController::updateActivityById)
-        app.get("/api/users/{id}/get-activities", HealthTrackerController::getActivityById)
+//        get(UserController::getAllUsers)
+        app.get("/api/users", UserController::getAllUsers)
+        app.get("/api/users/{user-id}", UserController::getUserByUserId)
+        app.post("/api/users/create-user", UserController::addUser)
+        app.get("/api/users/email/{email}", UserController::getUserByEmail)
+        app.delete("/api/users/remove-user/{user-id}", UserController::deleteUserById)
+        app.put("/api/users/{user-id}", UserController::updateUser)
+        //Activities path calling
+        app.get("/api/activities", ActivityController::getAllActivities)
+        app.post("/api/add-activities", ActivityController::addActivity)
+        app.get("/api/users/{user-id}/activities", ActivityController::getActivitiesByUserId)
+        app.delete("/api/users/{user-id}/remove-activities",ActivityController::deleteActivityByUserId)
+        app.delete("/api/users/{id}/remove-activity", ActivityController::deleteActivity)
+        app.put("/api/users/{id}/update-activity", ActivityController::updateActivityById)
+        app.get("/api/users/{id}/get-activities", ActivityController::getActivityById)
     }
     private fun getRemoteAssignedPort(): Int {
         val remotePort = System.getenv("PORT")

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import ie.setu.domain.User
 import io.javalin.http.Context
 
-class UserController {
+object UserController {
     private val userDao = UserDAO()
 
     fun getAllUsers(ctx: Context) {

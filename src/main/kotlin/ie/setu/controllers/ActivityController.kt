@@ -10,7 +10,7 @@ import ie.setu.domain.Activity
 import ie.setu.domain.repository.ActivityDAO
 import io.javalin.http.Context
 
-class ActivityController {
+object ActivityController {
     private val activityDAO = ActivityDAO()
     private val userDao = UserDAO()
 
