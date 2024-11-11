@@ -1,6 +1,6 @@
 package ie.setu.controllers
 
-import UserDAO
+import ie.setu.domain.repository.UserDAO
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.joda.JodaModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper

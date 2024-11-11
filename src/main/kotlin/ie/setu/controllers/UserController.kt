@@ -1,6 +1,6 @@
 package ie.setu.controllers
 
-import UserDAO
+import ie.setu.domain.repository.UserDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import ie.setu.domain.User

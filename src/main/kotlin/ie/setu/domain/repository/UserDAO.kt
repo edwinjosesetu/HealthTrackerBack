@@ -1,3 +1,5 @@
+package ie.setu.domain.repository
+
 import ie.setu.domain.User
 import ie.setu.domain.db.Users
 import org.jetbrains.exposed.sql.*
@@ -30,6 +32,7 @@ class UserDAO {
             Users.insert {
                 it[name] = user.name
                 it[email] = user.email
+                it[password] = user.password
             }
         }
     }
@@ -54,7 +57,9 @@ class UserDAO {
                 Users.id eq id}) {
                 it[name] = user.name
                 it[email] = user.email
+                it[password] = user.password
             }
         }
     }
+
 }

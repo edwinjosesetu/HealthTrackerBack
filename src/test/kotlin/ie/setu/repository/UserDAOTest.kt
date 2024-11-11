@@ -1,7 +1,7 @@
 package ie.setu.repository
 
 import ie.setu.domain.db.Users
-import UserDAO
+import ie.setu.domain.repository.UserDAO
 import ie.setu.domain.User
 import ie.setu.helpers.nonExistingEmail
 import ie.setu.helpers.users
@@ -124,7 +124,7 @@ class UserDAOTest {
     }
 
 
-    internal fun populateUserTable(): UserDAO{
+    internal fun populateUserTable(): UserDAO {
         SchemaUtils.create(Users)
         val userDAO = UserDAO()
         userDAO.save(user1)
