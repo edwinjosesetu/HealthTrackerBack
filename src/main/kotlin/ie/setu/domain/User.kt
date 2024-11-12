@@ -6,3 +6,7 @@ data class User (val id: Int,
                  val name:String,
                  val email:String,
                  val password:String)
+data class LoginModel(
+    val email: String,
+    val password: String
+)

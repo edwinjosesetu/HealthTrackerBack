@@ -1,6 +1,7 @@
 package ie.setu.utils
 
 import ie.setu.domain.Activity
+import ie.setu.domain.LoginModel
 import ie.setu.domain.User
 import ie.setu.domain.db.Activities
 import ie.setu.domain.db.Users

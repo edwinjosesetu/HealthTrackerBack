@@ -1,5 +1,6 @@
 package ie.setu.domain.repository
 
+import ie.setu.domain.LoginModel
 import ie.setu.domain.User
 import ie.setu.domain.db.Users
 import org.jetbrains.exposed.sql.*
@@ -57,9 +58,38 @@ class UserDAO {
                 Users.id eq id}) {
                 it[name] = user.name
                 it[email] = user.email
+            }
+        }
+    }
+    fun userRegister(user: User){
+        transaction {
+            Users.insert {
+                it[name] = user.name
+                it[email] = user.email
                 it[password] = user.password
             }
         }
     }
 
+    fun loginUser(model: LoginModel):Boolean{
+        return transaction {
+            Users.selectAll().where { Users.email eq model.email and (Users.password eq model.password)}
+                .singleOrNull() != null
+        }
+    }
+
+    fun updateUserLog(id: Int, user: User){
+        transaction {
+            Users.update({ Users.id eq id}) {
+                it[name] = user.name
+                it[email] = user.email
+                it[password] = user.password
+            }
+        }
+    }
+    fun deleteUserLog(id: Int) :Int{
+        return transaction {
+            Users.deleteWhere { Users.id eq id }
+        }
+    }
 }

@@ -40,6 +40,11 @@ class JavalinConfig {
         app.delete("/api/users/{id}/remove-activity", ActivityController::deleteActivity)
         app.put("/api/users/{id}/update-activity", ActivityController::updateActivityById)
         app.get("/api/users/{id}/get-activities", ActivityController::getActivityById)
+        //User feature paths
+        app.post("/api/users/register-user", UserController::newUserRegister)
+        app.post("/api/users/login-user", UserController::loginUser)
+        app.put("/api/users/login-update/{user-id}", UserController::updateUserLog)
+        app.delete("/api/users/login-delete/{user-id}", UserController::deleteUserLog)
     }
     private fun getRemoteAssignedPort(): Int {
         val remotePort = System.getenv("PORT")
