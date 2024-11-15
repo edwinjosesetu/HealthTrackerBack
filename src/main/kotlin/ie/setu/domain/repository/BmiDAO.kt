@@ -49,4 +49,13 @@ class BmiDAO {
         }
         return bmiList
     }
+
+    fun findByBmiId(id: Int): Bmi? {
+        return transaction {
+            BmiTable
+                .selectAll().where { BmiTable.id eq id }
+                .map { mapToBmi(it) }
+                .firstOrNull()
+        }
+    }
 }

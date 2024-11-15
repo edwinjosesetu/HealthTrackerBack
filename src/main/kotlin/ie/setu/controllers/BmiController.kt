@@ -46,4 +46,11 @@ object BmiController {
         val bmi = bmiDAO.getAll()
         ctx.json(bmi)
     }
+
+    fun findByBmiId(ctx: Context) {
+        val bmi = bmiDAO.findByBmiId(ctx.pathParam("bmi-id").toInt())
+        if (bmi != null) {
+            ctx.json(bmi)
+        }
+    }
 }
