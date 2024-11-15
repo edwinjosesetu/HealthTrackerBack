@@ -39,4 +39,14 @@ class BmiDAO {
                 .map { mapToBmi(it) }
         }
     }
+
+    fun getAll(): ArrayList<Bmi> {
+        val bmiList: ArrayList<Bmi> = arrayListOf()
+        transaction {
+            BmiTable.selectAll().map {
+                bmiList.add(mapToBmi(it))
+            }
+        }
+        return bmiList
+    }
 }

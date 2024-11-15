@@ -41,4 +41,9 @@ object BmiController {
             ctx.json(bmiData)
         }
     }
+
+    fun getAllBmi(ctx: Context) {
+        val bmi = bmiDAO.getAll()
+        ctx.json(bmi)
+    }
 }
