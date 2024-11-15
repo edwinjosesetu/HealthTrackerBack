@@ -1,6 +1,7 @@
 package ie.setu.controllers
 
 import ie.setu.domain.Bmi
+import ie.setu.domain.db.BmiTable.userId
 import ie.setu.domain.repository.BmiDAO
 import ie.setu.domain.repository.UserDAO
 import ie.setu.utils.jsonToObject
@@ -22,6 +23,22 @@ object BmiController {
             ctx.status(201)
         } else {
             ctx.status(404)
+        }
+    }
+
+    fun findByUserId(ctx: Context) {
+        val userId = userDao.findById(ctx.pathParam("user-id").toInt())
+        if (userId == null) {
+            ctx.status(400).json(mapOf("error" to "User does not exist"))
+            return
+        }
+        val bmiData = bmiDAO.findByUserId(ctx.pathParam("user-id").toInt())
+        if(bmiData.isEmpty())
+        {
+            ctx.status(400).json(mapOf("error" to "No BMI data found"))
+        }
+        else{
+            ctx.json(bmiData)
         }
     }
 }

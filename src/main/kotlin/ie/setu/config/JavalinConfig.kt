@@ -49,6 +49,7 @@ class JavalinConfig {
 
         //Bmi feature paths
         app.post("/api/bmi/calculate-bmi", BmiController::calculateBmi)
+        app.get("/api/bmi/users/{user-id}",BmiController::findByUserId)
     }
     private fun getRemoteAssignedPort(): Int {
         val remotePort = System.getenv("PORT")

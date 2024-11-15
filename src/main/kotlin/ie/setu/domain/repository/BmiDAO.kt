@@ -1,9 +1,11 @@
 package ie.setu.domain.repository
 
-import ie.setu.domain.db.BmiTable
-import org.jetbrains.exposed.sql.transactions.transaction
 import ie.setu.domain.Bmi
+import ie.setu.domain.db.BmiTable
+import ie.setu.utils.mapToBmi
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class BmiDAO {
     fun save(bmi: Bmi): Int {
@@ -27,6 +29,14 @@ class BmiDAO {
             return (weight / (heightToMeter * heightToMeter))
         } else {
             throw IllegalArgumentException("Weight and height must be positive")
+        }
+    }
+
+    fun findByUserId(userId: Int): List<Bmi> {
+        return transaction {
+            BmiTable
+                .selectAll().where { BmiTable.userId eq userId }
+                .map { mapToBmi(it) }
         }
     }
 }
