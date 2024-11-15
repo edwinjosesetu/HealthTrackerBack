@@ -6,6 +6,7 @@ import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.json.JavalinJackson
 import ie.setu.controllers.UserController
 import ie.setu.controllers.ActivityController
+import ie.setu.controllers.BmiController
 
 class JavalinConfig {
 
@@ -40,11 +41,14 @@ class JavalinConfig {
         app.delete("/api/users/{id}/remove-activity", ActivityController::deleteActivity)
         app.put("/api/users/{id}/update-activity", ActivityController::updateActivityById)
         app.get("/api/users/{id}/get-activities", ActivityController::getActivityById)
-        //User feature paths
+        //User login feature paths
         app.post("/api/users/register-user", UserController::newUserRegister)
         app.post("/api/users/login-user", UserController::loginUser)
         app.put("/api/users/login-update/{user-id}", UserController::updateUserLog)
         app.delete("/api/users/login-delete/{user-id}", UserController::deleteUserLog)
+
+        //Bmi feature paths
+        app.post("/api/bmi/calculate-bmi", BmiController::calculateBmi)
     }
     private fun getRemoteAssignedPort(): Int {
         val remotePort = System.getenv("PORT")
