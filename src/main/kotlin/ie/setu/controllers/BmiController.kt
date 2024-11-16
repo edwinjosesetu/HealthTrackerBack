@@ -1,12 +1,10 @@
 package ie.setu.controllers
 
 import ie.setu.domain.Bmi
-import ie.setu.domain.db.BmiTable.userId
 import ie.setu.domain.repository.BmiDAO
 import ie.setu.domain.repository.UserDAO
 import ie.setu.utils.jsonToObject
 import io.javalin.http.Context
-
 
 
 object BmiController {
@@ -52,5 +50,13 @@ object BmiController {
         if (bmi != null) {
             ctx.json(bmi)
         }
+    }
+
+    fun deleteByUserId(ctx: Context) {
+        bmiDAO.deleteByUserId(ctx.pathParam("user-id").toInt())
+    }
+
+    fun deleteByBmiId(ctx: Context) {
+        bmiDAO.deleteByBmiId(ctx.pathParam("bmi-id").toInt())
     }
 }

@@ -3,6 +3,8 @@ package ie.setu.domain.repository
 import ie.setu.domain.Bmi
 import ie.setu.domain.db.BmiTable
 import ie.setu.utils.mapToBmi
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -56,6 +58,18 @@ class BmiDAO {
                 .selectAll().where { BmiTable.id eq id }
                 .map { mapToBmi(it) }
                 .firstOrNull()
+        }
+    }
+
+    fun deleteByUserId(userId: Int): Int{
+        return transaction {
+            BmiTable.deleteWhere { BmiTable.userId eq userId }
+        }
+    }
+
+    fun deleteByBmiId (bmiId: Int): Int{
+        return transaction{
+            BmiTable.deleteWhere { id eq bmiId }
         }
     }
 }
