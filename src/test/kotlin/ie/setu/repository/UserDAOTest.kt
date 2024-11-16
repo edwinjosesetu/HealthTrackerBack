@@ -1,5 +1,6 @@
 package ie.setu.repository
 
+import ie.setu.domain.LoginModel
 import ie.setu.domain.db.Users
 import ie.setu.domain.repository.UserDAO
 import ie.setu.domain.User
@@ -8,7 +9,7 @@ import ie.setu.helpers.users
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -174,7 +175,7 @@ class UserDAOTest {
                 val userDAO = populateUserTable()
 
                 //Act & Assert
-                val user3Updated = User(3, "new username", "new@email.ie")
+                val user3Updated = User(3, "new username", "new@email.ie", "mary789")
                 userDAO.updateUser(user3.id, user3Updated)
                 assertEquals(user3Updated, userDAO.findById(3))
             }
@@ -188,10 +189,30 @@ class UserDAOTest {
                 val userDAO = populateUserTable()
 
                 //Act & Assert
-                val user4Updated = User(4, "new username", "new@email.ie")
+                val user4Updated = User(4, "new username", "new@email.ie", "password123")
                 userDAO.updateUser(4, user4Updated)
                 assertEquals(null, userDAO.findById(4))
                 assertEquals(3, userDAO.getAll().size)
+            }
+        }
+    }
+    @Nested
+    inner class UserLogin{
+        @Test
+        fun `login with valid credentials succeeds`() {
+            transaction {
+                val userDAO = populateUserTable()
+                val loginModel = LoginModel(user1.email, user1.password)
+                assertTrue(userDAO.loginUser(loginModel))
+            }
+        }
+
+        @Test
+        fun `login with invalid credentials fails`() {
+            transaction {
+                val userDAO = populateUserTable()
+                val loginModel = LoginModel("invalid@test.com", "wrong password")
+                assertFalse(userDAO.loginUser(loginModel))
             }
         }
     }
