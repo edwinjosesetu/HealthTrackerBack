@@ -9,6 +9,7 @@ import ie.setu.utils.mapToUser
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 
+
 class UserDAO {
 
     fun getAll() : ArrayList<User>{
