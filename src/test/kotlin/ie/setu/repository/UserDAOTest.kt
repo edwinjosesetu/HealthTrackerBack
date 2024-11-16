@@ -207,6 +207,8 @@ class UserDAOTest {
             }
         }
 
+        //Used Al for debugging and references
+
         @Test
         fun `login with invalid credentials fails`() {
             transaction {
