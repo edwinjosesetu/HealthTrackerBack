@@ -8,6 +8,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 
 import ie.setu.domain.Activity
 import ie.setu.domain.repository.ActivityDAO
+import ie.setu.utils.jsonToObject
 import io.javalin.http.Context
 
 object ActivityController {
@@ -16,31 +17,20 @@ object ActivityController {
 
     fun getAllActivities(ctx: Context) {
         //mapper handles the deserialization of Joda date into a String.
-        val mapper = jacksonObjectMapper()
-            .registerModule(JodaModule())
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        ctx.json(mapper.writeValueAsString( activityDAO.getAll() ))
+        ctx.json(activityDAO.getAll())
     }
 
     fun getActivitiesByUserId(ctx: Context) {
         if (userDao.findById(ctx.pathParam("user-id").toInt()) != null) {
             val activities = activityDAO.findByUserId(ctx.pathParam("user-id").toInt())
             if (activities.isNotEmpty()) {
-                //mapper handles the deserialization of Joda date into a String.
-                val mapper = jacksonObjectMapper()
-                    .registerModule(JodaModule())
-                    .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                ctx.json(mapper.writeValueAsString(activities))
+                ctx.json(activities)
             }
         }
     }
 
     fun addActivity(ctx: Context) {
-        //mapper handles the serialisation of Joda date into a String.
-        val mapper = jacksonObjectMapper()
-            .registerModule(JodaModule())
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        val activity = mapper.readValue<Activity>(ctx.body())
+        val activity: Activity = jsonToObject(ctx.body())
         activityDAO.save(activity)
         ctx.json(activity)
     }
@@ -54,8 +44,7 @@ object ActivityController {
     }
 
     fun updateActivityById(ctx: Context) {
-        val mapper = jacksonObjectMapper().registerModule(JodaModule())
-        val activityUpdates = mapper.readValue<Activity>(ctx.body())
+        val activityUpdates: Activity = jsonToObject(ctx.body())
         activityDAO.updateActivity(
             id = ctx.pathParam("id").toInt(),
             activity = activityUpdates
