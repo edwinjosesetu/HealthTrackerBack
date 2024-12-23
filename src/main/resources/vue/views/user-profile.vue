@@ -30,7 +30,6 @@
   </app-layout>
 </template>
 
-
 <script>
 app.component("user-profile", {
   template: "#user-profile",
