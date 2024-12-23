@@ -1,18 +1,33 @@
 <template id="user-profile">
-  <div>
-    <form v-if="user">
-      <label class="col-form-label">User ID: </label>
-      <input class="form-control" v-model="user.id" name="id" type="number" readonly/><br>
-      <label class="col-form-label">Name: </label>
-      <input class="form-control" v-model="user.name" name="username" type="text"/><br>
-      <label class="col-form-label">Email: </label>
-      <input class="form-control" v-model="user.email" name="email" type="email"/><br>
-    </form>
-    <dt v-if="user">
-      <br>
-      <a :href="`/users/${user.id}/activities`">View User Activities</a>
-    </dt>
-  </div>
+  <app-layout>
+    <div class="card bg-light mb-3">
+      <div class="card-header">
+        User Profile
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="input-user-id">User ID</span>
+            </div>
+            <input type="number" class="form-control" v-model="user.id" name="id" readonly placeholder="Id"/>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="input-user-name">Name</span>
+            </div>
+            <input type="text" class="form-control" v-model="user.name" name="name" placeholder="Name"/>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="input-user-email">Email</span>
+            </div>
+            <input type="email" class="form-control" v-model="user.email" name="email" placeholder="Email"/>
+          </div>
+        </form>
+      </div>
+    </div>
+  </app-layout>
 </template>
 
 
