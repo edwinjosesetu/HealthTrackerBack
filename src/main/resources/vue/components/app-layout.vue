@@ -42,4 +42,3 @@ app.component("app-layout", {template: "#app-layout"});
   background-color: #e3f2fd;
 }
 </style>
-
