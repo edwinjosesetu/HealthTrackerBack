@@ -1,12 +1,12 @@
 package ie.setu.config
 
-import ie.setu.utils.jsonObjectMapper
-import io.javalin.Javalin
-import io.javalin.apibuilder.ApiBuilder.*
-import io.javalin.json.JavalinJackson
-import ie.setu.controllers.UserController
 import ie.setu.controllers.ActivityController
 import ie.setu.controllers.BmiController
+import ie.setu.controllers.SleepController
+import ie.setu.controllers.UserController
+import ie.setu.utils.jsonObjectMapper
+import io.javalin.Javalin
+import io.javalin.json.JavalinJackson
 import io.javalin.vue.VueComponent
 
 class JavalinConfig {
@@ -55,6 +55,12 @@ class JavalinConfig {
         app.get("/api/bmi/{bmi-id}", BmiController::findByBmiId)
         app.delete("/api/bmi/delete-userId/{user-id}", BmiController::deleteByUserId)
         app.delete("/api/bmi/delete-bmiId/{bmi-id}", BmiController::deleteByBmiId)
+
+        //Sleep tracker path
+        app.post("api/sleep/add-sleep", SleepController::addSleep)
+        app.get("api/sleep/users/{user-id}", SleepController::getSleepByUserId)
+        app.put("api/sleep/update-users/{id}", SleepController::updateSleepById)
+        app.delete("api/sleep/remove-user/{id}", SleepController::deleteSleepById)
 
         // The @routeComponent that we added in layout.html earlier will be replaced
         // by the String inside the VueComponent. This means a call to / will load
