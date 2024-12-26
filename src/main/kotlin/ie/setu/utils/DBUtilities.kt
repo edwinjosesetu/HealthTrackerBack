@@ -1,10 +1,7 @@
 package ie.setu.utils
 
 import ie.setu.domain.*
-import ie.setu.domain.db.Activities
-import ie.setu.domain.db.BmiTable
-import ie.setu.domain.db.SleepTable
-import ie.setu.domain.db.Users
+import ie.setu.domain.db.*
 import org.jetbrains.exposed.sql.ResultRow
 
 fun mapToUser(it: ResultRow) = User(
@@ -35,4 +32,10 @@ fun mapToSleep(it: ResultRow) = Sleep(
     duration = it[SleepTable.duration],
     date = it[SleepTable.date],
     userId = it[SleepTable.userId]
+)
+fun mapToWater(it: ResultRow) = Water(
+    id = it[Waters.id],
+    amount = it[Waters.amount],
+    date = it[Waters.date],
+    userId = it[Waters.userId],
 )
