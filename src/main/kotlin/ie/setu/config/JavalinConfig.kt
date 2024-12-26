@@ -1,9 +1,7 @@
 package ie.setu.config
 
-import ie.setu.controllers.ActivityController
-import ie.setu.controllers.BmiController
-import ie.setu.controllers.SleepController
-import ie.setu.controllers.UserController
+import ie.setu.controllers.*
+import ie.setu.controllers.WaterController.addWater
 import ie.setu.utils.jsonObjectMapper
 import io.javalin.Javalin
 import io.javalin.json.JavalinJackson
@@ -61,6 +59,14 @@ class JavalinConfig {
         app.get("api/sleep/users/{user-id}", SleepController::getSleepByUserId)
         app.put("api/sleep/update-users/{id}", SleepController::updateSleepById)
         app.delete("api/sleep/remove-user/{id}", SleepController::deleteSleepById)
+
+        //Water intake paths
+        app.post("api/water/add-water", WaterController::addWater)
+        app.get("api/water/{id}", WaterController::getWaterById)
+        app.get("api/water/users/{user-id}", WaterController::getWaterByUserId)
+        app.put("api/water/{id}", WaterController::updateWaterById)
+        app.delete("api/delete-water/{id}", WaterController::deleteWaterById)
+        app.delete("api/delete-water/users/{user-id}", WaterController::deleteWaterByUserId)
 
         // The @routeComponent that we added in layout.html earlier will be replaced
         // by the String inside the VueComponent. This means a call to / will load
