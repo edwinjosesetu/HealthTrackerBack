@@ -1,11 +1,9 @@
 package ie.setu.utils
 
-import ie.setu.domain.Activity
-import ie.setu.domain.Bmi
-import ie.setu.domain.LoginModel
-import ie.setu.domain.User
+import ie.setu.domain.*
 import ie.setu.domain.db.Activities
 import ie.setu.domain.db.BmiTable
+import ie.setu.domain.db.SleepTable
 import ie.setu.domain.db.Users
 import org.jetbrains.exposed.sql.ResultRow
 
@@ -31,4 +29,10 @@ fun mapToBmi(it: ResultRow) = Bmi (
     bmiCalculation = it[BmiTable.bmiCalculation],
     timestamp = it[BmiTable.timestamp],
     userId = it[BmiTable.userId]
+)
+fun mapToSleep(it: ResultRow) = Sleep(
+    id = it[SleepTable.id],
+    duration = it[SleepTable.duration],
+    date = it[SleepTable.date],
+    userId = it[SleepTable.userId]
 )
