@@ -21,7 +21,6 @@
         </div>
       </div>
     </div>
-
   </app-layout>
 </template>
 
@@ -43,4 +42,3 @@ app.component('home-page',
       }
     });
 </script>
-
