@@ -83,11 +83,12 @@ app.component("user-profile", {
   methods: {
     updateUser: function () {
       const userId = this.$javalin.pathParams["user-id"];
-      const url = `/api/users/${userId}`
+      const url = `/api/users/${userId}`;
       axios.patch(url,
           {
             name: this.user.name,
-            email: this.user.email
+            email: this.user.email,
+            password: this.user.password
           })
           .then(response =>
               this.user.push(response.data))
@@ -99,7 +100,7 @@ app.component("user-profile", {
     deleteUser: function () {
       if (confirm("Do you really want to delete?")) {
         const userId = this.$javalin.pathParams["user-id"];
-        const url = `/api/users/${userId}`
+        const url = `/api/users/remove-user/${userId}`
         axios.delete(url)
             .then(response => {
               alert("User deleted")
