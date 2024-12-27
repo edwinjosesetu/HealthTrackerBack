@@ -39,3 +39,14 @@ fun mapToWater(it: ResultRow) = Water(
     date = it[Waters.date],
     userId = it[Waters.userId],
 )
+fun mapToMeal(it: ResultRow) = Meal(
+    id = it[Meals.id],
+    userId = it[Meals.userId],
+    mealType = it[Meals.mealType],
+    foodItems = it[Meals.foodItems],
+    calories = it[Meals.calories],
+    protein = it[Meals.protein],
+    carbs = it[Meals.carbs],
+    fat = it[Meals.fat],
+    loggedAt = it[Meals.loggedAt]
+)
