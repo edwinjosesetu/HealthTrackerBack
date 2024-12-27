@@ -55,18 +55,27 @@ class JavalinConfig {
         app.delete("/api/bmi/delete-bmiId/{bmi-id}", BmiController::deleteByBmiId)
 
         //Sleep tracker path
-        app.post("api/sleep/add-sleep", SleepController::addSleep)
-        app.get("api/sleep/users/{user-id}", SleepController::getSleepByUserId)
-        app.put("api/sleep/update-users/{id}", SleepController::updateSleepById)
-        app.delete("api/sleep/remove-user/{id}", SleepController::deleteSleepById)
+        app.post("/api/sleep/add-sleep", SleepController::addSleep)
+        app.get("/api/sleep/users/{user-id}", SleepController::getSleepByUserId)
+        app.put("/api/sleep/update-users/{id}", SleepController::updateSleepById)
+        app.delete("/api/sleep/remove-user/{id}", SleepController::deleteSleepById)
 
         //Water intake paths
-        app.post("api/water/add-water", WaterController::addWater)
-        app.get("api/water/{id}", WaterController::getWaterById)
-        app.get("api/water/users/{user-id}", WaterController::getWaterByUserId)
-        app.put("api/water/{id}", WaterController::updateWaterById)
-        app.delete("api/delete-water/{id}", WaterController::deleteWaterById)
-        app.delete("api/delete-water/users/{user-id}", WaterController::deleteWaterByUserId)
+        app.post("/api/water/add-water", WaterController::addWater)
+        app.get("/api/water/{id}", WaterController::getWaterById)
+        app.get("/api/water/users/{user-id}", WaterController::getWaterByUserId)
+        app.put("/api/water/{id}", WaterController::updateWaterById)
+        app.delete("/api/delete-water/{id}", WaterController::deleteWaterById)
+        app.delete("/api/delete-water/users/{user-id}", WaterController::deleteWaterByUserId)
+
+        //Meals path
+        app.get("/api/meals", MealController::getAllMeals)
+        app.post("/api/add-meals", MealController::addMeal)
+        app.get("/api/users/meals/{user-id}", MealController::getMealsByUserId)
+        app.get("/api/meals/{id}", MealController::findMealById)
+        app.delete("/api/remove-meals/{id}", MealController::deleteMealById)
+        app.delete("/api/users/remove-meals/{user-id}", MealController::deleteMealByUserId)
+        app.put("/api/meals/{id}", MealController::updateMeal)
 
         // The @routeComponent that we added in layout.html earlier will be replaced
         // by the String inside the VueComponent. This means a call to / will load

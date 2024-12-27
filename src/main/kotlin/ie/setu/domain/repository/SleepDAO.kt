@@ -29,7 +29,6 @@ class SleepDAO {
         }
     }
 
-
     fun updateById(sleepId: Int, sleep: Sleep): Int {
         return transaction {
             SleepTable.update ({
