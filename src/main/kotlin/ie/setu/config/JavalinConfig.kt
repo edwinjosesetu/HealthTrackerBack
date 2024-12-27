@@ -31,19 +31,19 @@ class JavalinConfig {
         app.post("/api/users/create-user", UserController::addUser)
         app.get("/api/users/email/{email}", UserController::getUserByEmail)
         app.delete("/api/users/remove-user/{user-id}", UserController::deleteUserById)
-        app.put("/api/users/{user-id}", UserController::updateUser)
+        app.patch("/api/users/{user-id}", UserController::updateUser)
         //Activities path calling
         app.get("/api/activities", ActivityController::getAllActivities)
         app.post("/api/add-activities", ActivityController::addActivity)
         app.get("/api/users/{user-id}/activities", ActivityController::getActivitiesByUserId)
         app.delete("/api/users/{user-id}/remove-activities",ActivityController::deleteActivityByUserId)
         app.delete("/api/users/{id}/remove-activity", ActivityController::deleteActivity)
-        app.put("/api/users/{id}/update-activity", ActivityController::updateActivityById)
+        app.patch("/api/users/{id}/update-activity", ActivityController::updateActivityById)
         app.get("/api/users/{id}/get-activities", ActivityController::getActivityById)
         //User login feature paths
         app.post("/api/users/register-user", UserController::newUserRegister)
         app.post("/api/users/login-user", UserController::loginUser)
-        app.put("/api/users/login-update/{user-id}", UserController::updateUserLog)
+        app.patch("/api/users/login-update/{user-id}", UserController::updateUserLog)
         app.delete("/api/users/login-delete/{user-id}", UserController::deleteUserLog)
 
         //Bmi feature paths
@@ -57,14 +57,14 @@ class JavalinConfig {
         //Sleep tracker path
         app.post("/api/sleep/add-sleep", SleepController::addSleep)
         app.get("/api/sleep/users/{user-id}", SleepController::getSleepByUserId)
-        app.put("/api/sleep/update-users/{id}", SleepController::updateSleepById)
+        app.patch("/api/sleep/update-users/{id}", SleepController::updateSleepById)
         app.delete("/api/sleep/remove-user/{id}", SleepController::deleteSleepById)
 
         //Water intake paths
         app.post("/api/water/add-water", WaterController::addWater)
         app.get("/api/water/{id}", WaterController::getWaterById)
         app.get("/api/water/users/{user-id}", WaterController::getWaterByUserId)
-        app.put("/api/water/{id}", WaterController::updateWaterById)
+        app.patch("/api/water/{id}", WaterController::updateWaterById)
         app.delete("/api/delete-water/{id}", WaterController::deleteWaterById)
         app.delete("/api/delete-water/users/{user-id}", WaterController::deleteWaterByUserId)
 
@@ -75,7 +75,7 @@ class JavalinConfig {
         app.get("/api/meals/{id}", MealController::findMealById)
         app.delete("/api/remove-meals/{id}", MealController::deleteMealById)
         app.delete("/api/users/remove-meals/{user-id}", MealController::deleteMealByUserId)
-        app.put("/api/meals/{id}", MealController::updateMeal)
+        app.patch("/api/meals/{id}", MealController::updateMeal)
 
         // The @routeComponent that we added in layout.html earlier will be replaced
         // by the String inside the VueComponent. This means a call to / will load

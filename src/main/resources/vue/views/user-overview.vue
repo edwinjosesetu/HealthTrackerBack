@@ -29,6 +29,12 @@
             </div>
             <input type="email" class="form-control" v-model="formData.email" name="email" placeholder="Email"/>
           </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="input-user-password">Password</span>
+            </div>
+            <input type="password" class="form-control" v-model="formData.password" name="password" placeholder="Password"/>
+          </div>
         </form>
         <button rel="tooltip" title="Update" class="btn btn-info btn-simple btn-link" @click="addUser()">Add User</button>
       </div>
@@ -54,6 +60,7 @@
     </div>
   </app-layout>
 </template>
+
 <script>
 app.component("user-overview", {
   template: "#user-overview",
@@ -75,25 +82,26 @@ app.component("user-overview", {
       if (confirm('Are you sure you want to delete this user? This action cannot be undone.', 'Warning')) {
         //user confirmed delete
         const userId = user.id;
-        const url = `/api/users/${userId}`;
+        const url = `/api/users/remove-user/${userId}`;
         axios.delete(url)
             .then(response =>
                 //delete from the local state so Vue will reload list automatically
-                this.users.splice(index, 1).push(response.data))
+                this.user.splice(index, 1).push(response.data))
             .catch(function (error) {
               console.log(error)
             });
       }
     },
     addUser: function (){
-      const url = `/api/users`;
+      const url = `/api/users/create-user`;
       axios.post(url,
           {
             name: this.formData.name,
-            email: this.formData.email
+            email: this.formData.email,
+            password: this.formData.password
           })
           .then(response => {
-            this.users.push(response.data)
+            this.user.push(response.data)
             this.hideForm= true;
           })
           .catch(error => {
