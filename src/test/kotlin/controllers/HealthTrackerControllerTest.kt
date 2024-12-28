@@ -176,14 +176,14 @@ class HealthTrackerControllerTest {
 
     //helper function to add a test user to the database
     private fun addUser (name: String, email: String, password: String): HttpResponse<JsonNode> {
-        return Unirest.post(origin + "/api/users")
+        return Unirest.post(origin + "/api/users/create-user")
             .body("{\"name\":\"$name\", \"email\":\"$email\", \"password\":\"$password\"}")
             .asJson()
     }
 
     //helper function to delete a test user from the database
     private fun deleteUser (id: Int): HttpResponse<String> {
-        return Unirest.delete(origin + "/api/users/$id").asString()
+        return Unirest.delete(origin + "/api/users/remove-user/${id}").asString()
     }
 
     //helper function to retrieve a test user from the database by email
@@ -198,7 +198,7 @@ class HealthTrackerControllerTest {
 
     //helper function to add a test user to the database
     private fun updateUser (id: Int, name: String, email: String, password: String): HttpResponse<JsonNode> {
-        return Unirest.patch(origin + "/api/users/$id")
+        return Unirest.patch(origin + "/api/users/${id}")
             .body("{\"name\":\"$name\", \"email\":\"$email\", \"password\":\"$password\"}")
             .asJson()
     }
