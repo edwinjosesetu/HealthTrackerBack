@@ -21,7 +21,7 @@ private val water3 = waters[2]
 class WaterDAOTest {
 
     companion object {
-        // Set up a connection to a local in-memory H2 database
+        // Set up a connection to a local in-memory H2  database
         @BeforeAll
         @JvmStatic
         internal fun setupInMemoryDatabaseConnection() {
