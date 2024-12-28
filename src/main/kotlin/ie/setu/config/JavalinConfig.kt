@@ -55,12 +55,14 @@ class JavalinConfig {
         app.delete("/api/bmi/delete-bmiId/{bmi-id}", BmiController::deleteByBmiId)
 
         //Sleep tracker path
+        app.get("/api/sleep", SleepController::getAllSleeps)
         app.post("/api/sleep/add-sleep", SleepController::addSleep)
         app.get("/api/sleep/users/{user-id}", SleepController::getSleepByUserId)
         app.patch("/api/sleep/update-users/{id}", SleepController::updateSleepById)
         app.delete("/api/sleep/remove-user/{id}", SleepController::deleteSleepById)
 
         //Water intake paths
+        app.get("/api/water", WaterController::getAllWaters)
         app.post("/api/water/add-water", WaterController::addWater)
         app.get("/api/water/{id}", WaterController::getWaterById)
         app.get("/api/water/users/{user-id}", WaterController::getWaterByUserId)

@@ -8,6 +8,17 @@ import io.javalin.http.Context
 object WaterController {
     private val waterDao = WaterDAO()
 
+    fun getAllWaters(ctx: Context){
+        val waters = waterDao.getAllWater()
+        if(waters.size != 0){
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
+        }
+        ctx.json(waters)
+    }
+
     fun getWaterById(ctx: Context) {
         val water = waterDao.findByWaterId(ctx.pathParam("id").toInt())
         if (water != null) {
