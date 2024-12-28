@@ -1,10 +1,13 @@
 package ie.setu.helpers
 
 import ie.setu.domain.Activity
+import ie.setu.domain.Bmi
 import ie.setu.domain.User
 import ie.setu.domain.db.Activities
+import ie.setu.domain.db.BmiTable
 import ie.setu.domain.db.Users
 import ie.setu.domain.repository.ActivityDAO
+import ie.setu.domain.repository.BmiDAO
 import ie.setu.domain.repository.UserDAO
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.joda.time.DateTime
@@ -34,6 +37,11 @@ val activities = arrayListOf<Activity>(
     Activity(id = 2, description = "Hopping", duration = 10.5, calories = 80, started = DateTime.now(), userId = 1),
     Activity(id = 3, description = "Walking", duration = 12.0, calories = 120, started = DateTime.now(), userId = 2)
 )
+val bmiTable = arrayListOf<Bmi>(
+    Bmi(id = 1, userId = 1,  weight = 60.0, height = 168.0, bmiCalculation = 21.258503401360546, timestamp=DateTime.now()),
+    Bmi(id = 2, userId = 2,  weight = 59.0, height = 154.0, bmiCalculation = 24.87771968291449, timestamp=DateTime.now()),
+    Bmi(id = 3, userId = 3,  weight = 58.0, height = 150.0, bmiCalculation = 25.77777777777778, timestamp=DateTime.now())
+)
 
 fun populateUserTable(): UserDAO {
     SchemaUtils.create(Users)
@@ -50,4 +58,12 @@ fun populateActivityTable(): ActivityDAO {
     activityDAO.save(activities[1])
     activityDAO.save(activities[2])
     return activityDAO
+}
+fun populateBmiTable(): BmiDAO {
+    SchemaUtils.create(BmiTable)
+    val bmiDAO = BmiDAO()
+    bmiDAO .save(bmiTable[0])
+    bmiDAO .save(bmiTable[1])
+    bmiDAO .save(bmiTable[2])
+    return bmiDAO
 }
