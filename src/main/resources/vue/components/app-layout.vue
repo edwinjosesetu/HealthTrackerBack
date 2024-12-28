@@ -18,6 +18,13 @@
             <li class="nav-item">
               <a class="nav-link" href="/activities">Activities</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/bmies">BMI</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/meals">Meals</a>
+            </li>
           </ul>
         </div>
       </nav>

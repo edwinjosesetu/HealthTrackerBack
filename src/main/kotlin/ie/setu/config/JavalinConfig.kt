@@ -53,6 +53,7 @@ class JavalinConfig {
         app.get("/api/bmi/{bmi-id}", BmiController::findByBmiId)
         app.delete("/api/bmi/delete-userId/{user-id}", BmiController::deleteByUserId)
         app.delete("/api/bmi/delete-bmiId/{bmi-id}", BmiController::deleteByBmiId)
+        app.patch("/api/bmi/{id}", BmiController::updateBmiById)
 
         //Sleep tracker path
         app.get("/api/sleep", SleepController::getAllSleeps)
@@ -87,6 +88,8 @@ class JavalinConfig {
         app.get("/users/{user-id}", VueComponent("<user-profile></user-profile>"))
         app.get("/activities", VueComponent("<user-activity-overview></user-activity-overview>"))
         app.get("/activities/{activity-id}", VueComponent("<activity-overview></activity-overview>"))
+        app.get("/bmies", VueComponent("<user-bmi-overview></user-bmi-overview>"))
+        app.get("/bmis/{bmis-id}", VueComponent("<bmi-overview></bmi-overview>"))
 
     }
     private fun getRemoteAssignedPort(): Int {
