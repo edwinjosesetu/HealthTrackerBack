@@ -94,7 +94,7 @@ class BmiDAOTest {
                 val userDAO = populateUserTable()
                 val bmiDAO  = populateBmiTable()
                 //Act & Assert
-                kotlin.test.assertEquals(null, bmiDAO .findByBmiId(4))
+                assertEquals(null, bmiDAO .findByBmiId(4))
             }
         }
 
@@ -104,8 +104,8 @@ class BmiDAOTest {
                 //Arrange - create and populate tables with three users and three bmi
                 val userDAO = populateUserTable()
                 val bmiDAO = populateBmiTable()                //Act & Assert
-                kotlin.test.assertEquals(bmi1, bmiDAO.findByBmiId(1))
-                kotlin.test.assertEquals(bmi2, bmiDAO.findByBmiId(2))
+                assertEquals(bmi1, bmiDAO.findByBmiId(1))
+                assertEquals(bmi2, bmiDAO.findByBmiId(2))
             }
         }
 
@@ -140,9 +140,10 @@ class BmiDAOTest {
                 //Act & Assert
                 kotlin.test.assertEquals(3, bmiDAO.getAll().size)
                 bmiDAO.deleteByBmiId(3)
-                kotlin.test.assertEquals(2, bmiDAO.getAll().size)
+                assertEquals(2, bmiDAO.getAll().size)
             }
         }
+
 
         @Test
         fun `deleting activities when 1 or more exist for user id results in deletion`() {
@@ -155,7 +156,7 @@ class BmiDAOTest {
                 //Act & Assert
                 assertEquals(3, bmiDAO.getAll().size)
                 bmiDAO .deleteByUserId(1)
-                kotlin.test.assertEquals(2, bmiDAO .getAll().size)
+                assertEquals(2, bmiDAO .getAll().size)
             }
         }
     }
