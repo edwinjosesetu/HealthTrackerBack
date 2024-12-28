@@ -1,20 +1,10 @@
 package ie.setu.helpers
 
-import ie.setu.domain.Activity
-import ie.setu.domain.Bmi
-import ie.setu.domain.Meal
-import ie.setu.domain.User
-import ie.setu.domain.db.Activities
-import ie.setu.domain.db.BmiTable
-import ie.setu.domain.db.Meals
-import ie.setu.domain.db.Users
-import ie.setu.domain.repository.ActivityDAO
-import ie.setu.domain.repository.BmiDAO
-import ie.setu.domain.repository.MealDAO
-import ie.setu.domain.repository.UserDAO
+import ie.setu.domain.*
+import ie.setu.domain.db.*
+import ie.setu.domain.repository.*
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.joda.time.DateTime
-import kotlin.random.Random
 
 val nonExistingEmail = "112233445566778testUser@xxxxx.xx"
 val validName = "Test User 1"
@@ -52,6 +42,11 @@ val mealTable = arrayListOf<Meal>(
     Meal(id = 2, userId = 1, mealType = "Lunch", foodItems = "Grilled Chicken Salad", calories = 350.00, protein = 30.0, carbs = 10.0, fat = 15.0, loggedAt = DateTime.now()),
     Meal(id = 3, userId = 1, mealType = "Dinner", foodItems = "Steak with Mashed Potatoes", calories = 600.00, protein = 40.0, carbs = 50.0, fat = 20.0, loggedAt = DateTime.now())
 )
+val sleeps = arrayListOf<Sleep>(
+    Sleep(id = 1, duration = 7.5, date = DateTime.now(), userId = 1),
+    Sleep(id = 2, duration = 6.0, date = DateTime.now(), userId = 2),
+    Sleep(id = 3, duration = 8.0, date = DateTime.now(), userId = 3)
+)
 
 
 fun populateUserTable(): UserDAO {
@@ -86,13 +81,11 @@ fun populateMealTable(): MealDAO {
     mealDAO.save(mealTable[2])
     return mealDAO
 }
-
-fun generateRandomEmail(): String {
-    val usernameLength = Random.nextInt(6, 13)
-    val username = (1..usernameLength).map {
-        (Random.nextInt(0, 26) + 'a'.toInt()).toChar()
-    }.joinToString("")
-    val domains = listOf("gmail", "yahoo", "outlook", "example")
-    val domain = domains[Random.nextInt(domains.size)]
-    return "$username@$domain.com"
+fun populateSleepTable(): SleepDAO {
+    SchemaUtils.create(SleepTable)
+    val sleepDAO = SleepDAO()
+    sleepDAO.save(sleeps[0])
+    sleepDAO.save(sleeps[1])
+    sleepDAO.save(sleeps[2])
+    return sleepDAO
 }
