@@ -67,9 +67,11 @@
         <ul>
           <li v-for="activity in activities" :key="activity.id">
             {{ activity.description }} for {{ activity.duration }} minutes, by {{ getUserName(activity.userId) }}
+            <a :href="`/activities/${activity.id}`">
             <button rel="tooltip" title="Update" class="btn btn-info btn-simple btn-link" @click="updateActivity(activity.id)">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
+            </a>
             <button rel="tooltip" title="Delete"
                     class="btn btn-info btn-simple btn-link" @click="deleteActivity(activity.id)">
               <i class="fas fa-trash" aria-hidden="true"></i>

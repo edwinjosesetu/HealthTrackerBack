@@ -52,6 +52,34 @@
             {{ activity.description }} for {{ activity.duration }} minutes
           </li>
         </ul>
+        <p  v-if="bmis.length === 0"> No BMIs yet...</p>
+        <p  v-if="bmis.length > 0"> BMIs so far...</p>
+        <ul>
+          <li v-for="bmi in bmis">
+            Height: {{ bmi.height }}, Weight: {{ bmi.weight }}, BMI: {{ bmi.bmiCalculation }}
+          </li>
+        </ul>
+        <p  v-if="sleeps.length === 0"> No Sleep yet...</p>
+        <p  v-if="sleeps.length > 0"> Sleeps so far...</p>
+        <ul>
+          <li v-for="sleep in sleeps">
+            Slept for {{ sleep.duration }} hours on {{ sleep.date }},
+          </li>
+        </ul>
+        <p  v-if="waters.length === 0"> No Water consumed  yet...</p>
+        <p  v-if="waters.length > 0"> Water Consumption so far...</p>
+        <ul>
+          <li v-for="water in waters">
+            Drank  {{ water.amount }} Litre of water on {{ water.date }},
+          </li>
+        </ul>
+        <p  v-if="meals.length === 0"> No Meal consumed  yet...</p>
+        <p  v-if="meals.length > 0"> Meal Consumption so far...</p>
+        <ul>
+          <li v-for="meal in meals">
+            Ate {{ meal.foodItems }} for {{ meal.mealType }} on {{meal.loggedAt}},
+          </li>
+        </ul>
       </div>
     </div>
   </app-layout>
@@ -64,6 +92,10 @@ app.component("user-profile", {
     user: null,
     noUserFound: false,
     activities: [],
+    bmis: [],
+    sleeps:[],
+    waters:[],
+    meals:[],
   }),
   created: function () {
     const userId = this.$javalin.pathParams["user-id"];
@@ -78,6 +110,26 @@ app.component("user-profile", {
         .then(res => this.activities = res.data)
         .catch(error => {
           console.log("No activities added yet (this is ok): " + error)
+        })
+    axios.get(`/api/bmi/users/${userId}`)
+        .then(res => this.bmis = res.data)
+        .catch(error => {
+          console.log("No BMI added yet (this is ok): " + error)
+        })
+    axios.get(`/api/sleep/users/${userId}`)
+        .then(res => this.sleeps = res.data)
+        .catch(error => {
+          console.log("No Sleep added yet (this is ok): " + error)
+        })
+    axios.get(`/api/water/users/${userId}`)
+        .then(res => this.waters = res.data)
+        .catch(error => {
+          console.log("No water consumption added yet (this is ok): " + error)
+        })
+    axios.get(`/api/users/meals/${userId}`)
+        .then(res => this.meals = res.data)
+        .catch(error => {
+          console.log("No meal consumption added yet (this is ok): " + error)
         })
   },
   methods: {
