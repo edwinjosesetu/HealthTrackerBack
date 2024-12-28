@@ -47,6 +47,11 @@ val sleeps = arrayListOf<Sleep>(
     Sleep(id = 2, duration = 6.0, date = DateTime.now(), userId = 2),
     Sleep(id = 3, duration = 8.0, date = DateTime.now(), userId = 3)
 )
+val waters = arrayListOf<Water>(
+    Water(id = 1, amount = 500.0F, date = DateTime.now(), userId = 1),
+    Water(id = 2, amount = 750.0F, date = DateTime.now(), userId = 2),
+    Water(id = 3, amount = 1000.0F, date = DateTime.now(), userId = 3)
+)
 
 
 fun populateUserTable(): UserDAO {
@@ -88,4 +93,12 @@ fun populateSleepTable(): SleepDAO {
     sleepDAO.save(sleeps[1])
     sleepDAO.save(sleeps[2])
     return sleepDAO
+}
+fun populateWaterTable(): WaterDAO{
+    SchemaUtils.create(Waters)
+    val waterDAO = WaterDAO()
+    waterDAO.save(waters[0])
+    waterDAO.save(waters[1])
+    waterDAO.save(waters[2])
+    return waterDAO
 }
