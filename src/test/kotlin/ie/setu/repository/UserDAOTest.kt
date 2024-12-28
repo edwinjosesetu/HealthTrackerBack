@@ -137,7 +137,7 @@ class UserDAOTest {
     @Nested
     inner class DeleteUsers {
         @Test
-        fun `deleting a non-existant user in table results in no deletion`() {
+        fun `deleting a non-existing user in table results in no deletion`() {
             transaction {
 
                 //Arrange - create and populate table with three users

@@ -66,9 +66,7 @@ class MealDAOTest {
                 val mealDAO = populateMealTable()
 
                 // Act & Assert
-                assertEquals(meal1, mealDAO.findByUserId(1)[0])
-                assertEquals(meal2, mealDAO.findByUserId(2)[0])
-                assertEquals(meal3, mealDAO.findByUserId(3)[0])
+                assertEquals(listOf(meal1, meal2,meal3), mealDAO.findByUserId(1))
             }
         }
 
@@ -169,9 +167,8 @@ class MealDAOTest {
 
                 // Act
                 mealDAO.deleteByUserId(1)
-
                 // Assert
-                assertEquals(2, mealDAO.getAllMeals().size)
+                assertEquals(0, mealDAO.findByUserId(1).size)
             }
         }
     }

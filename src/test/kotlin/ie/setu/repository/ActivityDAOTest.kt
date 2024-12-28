@@ -167,7 +167,7 @@ class ActivityDAOTest {
     inner class DeleteActivities {
 
         @Test
-        fun `deleting a non-existant activity (by id) in table results in no deletion`() {
+        fun `deleting a non-existing activity (by id) in table results in no deletion`() {
             transaction {
 
                 //Arrange - create and populate tables with three users and three activities
