@@ -59,4 +59,15 @@ object BmiController {
     fun deleteByBmiId(ctx: Context) {
         bmiDAO.deleteByBmiId(ctx.pathParam("bmi-id").toInt())
     }
+
+    fun updateBmiById(ctx: Context) {
+        val bmi : Bmi = jsonToObject(ctx.body())
+        if(bmiDAO.updateById(
+            id=ctx.pathParam("id").toInt(),
+            bmi=bmi) !=0)
+            ctx.status(204)
+        else{
+            ctx.status(404)
+        }
+    }
 }

@@ -8,6 +8,7 @@ import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 
 class BmiDAO {
     fun save(bmi: Bmi): Int {
@@ -70,6 +71,17 @@ class BmiDAO {
     fun deleteByBmiId (bmiId: Int): Int{
         return transaction{
             BmiTable.deleteWhere { id eq bmiId }
+        }
+    }
+
+    fun updateById(id: Int, bmi: Bmi): Int{
+        return transaction {
+            BmiTable.update ({ BmiTable.id eq id }) {
+                it[weight] = bmi.weight
+                it[height] = bmi.height
+                it[bmiCalculation] = bmi.bmiCalculation
+                it[userId] = bmi.userId
+            }
         }
     }
 }
