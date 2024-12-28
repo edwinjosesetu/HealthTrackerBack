@@ -12,6 +12,16 @@ import org.jetbrains.exposed.sql.update
 
 class WaterDAO {
 
+    fun getAllWater(): ArrayList<Water> {
+        val watersList: ArrayList<Water> = arrayListOf()
+        transaction {
+            Waters.selectAll().map {
+                watersList.add(mapToWater(it))
+            }
+        }
+        return watersList
+    }
+
     fun findByUserId(userId: Int): List<Water> {
         return transaction {
             Waters.selectAll().where{ Waters.userId eq userId }

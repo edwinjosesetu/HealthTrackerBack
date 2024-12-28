@@ -16,8 +16,14 @@ object ActivityController {
     private val userDao = UserDAO()
 
     fun getAllActivities(ctx: Context) {
-        //mapper handles the deserialization of Joda date into a String.
-        ctx.json(activityDAO.getAll())
+        val activities = activityDAO.getAll()
+        if (activities.size != 0) {
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
+        }
+        ctx.json(activities)
     }
 
     fun getActivitiesByUserId(ctx: Context) {
@@ -25,7 +31,14 @@ object ActivityController {
             val activities = activityDAO.findByUserId(ctx.pathParam("user-id").toInt())
             if (activities.isNotEmpty()) {
                 ctx.json(activities)
+                ctx.status(200)
             }
+            else{
+                ctx.status(404)
+            }
+        }
+        else{
+            ctx.status(404)
         }
     }
 
@@ -40,7 +53,10 @@ object ActivityController {
     }
 
     fun deleteActivity(ctx: Context) {
-        activityDAO.deleteByActivityId(ctx.pathParam("id").toInt())
+        if (activityDAO.deleteByActivityId(ctx.pathParam("id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
     }
 
     fun updateActivityById(ctx: Context) {
@@ -52,10 +68,13 @@ object ActivityController {
     }
 
     fun getActivityById(ctx: Context) {
-        val id = ctx.pathParam("id").toInt()
-        val activity = activityDAO.findByActivityId(id)
-        if (activity != null) {
+        val activity = activityDAO.findByActivityId((ctx.pathParam("id").toInt()))
+        if (activity != null){
             ctx.json(activity)
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
         }
     }
 }

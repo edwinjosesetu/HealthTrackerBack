@@ -9,6 +9,16 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class SleepDAO {
 
+    fun getAllSleep(): ArrayList<Sleep> {
+        val sleepList : ArrayList<Sleep> = arrayListOf()
+        transaction {
+            SleepTable.selectAll().map {
+                sleepList.add(mapToSleep(it))
+            }
+        }
+        return sleepList
+    }
+
     fun findByUserId(userId: Int): List<Sleep>{
         return transaction {
             SleepTable

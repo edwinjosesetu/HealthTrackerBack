@@ -11,6 +11,17 @@ object SleepController {
     private val userDao = UserDAO()
     private val sleepDao = SleepDAO()
 
+    fun getAllSleeps(ctx: Context) {
+        val sleeps = sleepDao.getAllSleep()
+        if (sleeps.size != 0){
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
+        }
+        ctx.json(sleeps)
+    }
+
     fun getSleepByUserId(ctx: Context) {
         if (userDao.findById(ctx.pathParam("user-id").toInt()) != null) {
             val sleep = sleepDao.findByUserId(ctx.pathParam("user-id").toInt())
