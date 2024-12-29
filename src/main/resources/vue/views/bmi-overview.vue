@@ -53,7 +53,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="input-bmi-timestamp">Date</span>
             </div>
-            <input type="date" class="form-control" v-model="bmi.timestamp" name="timestamp" placeholder="date"/>
+            <input type="text" class="form-control" v-model="bmi.timestamp" name="timestamp" placeholder="date"/>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">

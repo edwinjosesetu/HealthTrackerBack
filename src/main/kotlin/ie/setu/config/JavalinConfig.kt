@@ -90,6 +90,8 @@ class JavalinConfig {
         app.get("/activities/{activity-id}", VueComponent("<activity-overview></activity-overview>"))
         app.get("/bmies", VueComponent("<user-bmi-overview></user-bmi-overview>"))
         app.get("/bmis/{bmis-id}", VueComponent("<bmi-overview></bmi-overview>"))
+        app.get("/meals", VueComponent("<user-meals-overview></user-meals-overview>"))
+        app.get("/meals/{meal-id}", VueComponent("<meal-overview></meal-overview>"))
 
     }
     private fun getRemoteAssignedPort(): Int {
