@@ -140,9 +140,9 @@ app.component("user-activity-overview", {
             userId: this.formData.userId
           })
           .then(response => {
-            this.hideForm = true; // Hide the form after adding the activity
-            this.formData = {};   // Clear the form data
-            this.fetchActivities(); // Refresh the activity list dynamically
+            this.hideForm = true;
+            this.formData = {};
+            this.fetchActivities();
           })
           .catch(error => {
             console.log(error)

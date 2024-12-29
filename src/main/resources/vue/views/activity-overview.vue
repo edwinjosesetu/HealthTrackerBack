@@ -115,7 +115,6 @@ app.component("activity-overview", {
         axios.delete(url)
             .then(response => {
               alert("Activity deleted")
-              //display the /users endpoint
               window.location.href = '/activities';
             })
             .catch(function (error) {

@@ -148,6 +148,7 @@ app.component("user-profile", {
             console.log(error)
           })
       alert("User updated!")
+      window.location.href='/users'
     },
     deleteUser: function () {
       if (confirm("Do you really want to delete?")) {

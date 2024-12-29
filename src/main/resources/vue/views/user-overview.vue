@@ -80,18 +80,20 @@ app.component("user-overview", {
     },
     deleteUser: function (user, index) {
       if (confirm('Are you sure you want to delete this user? This action cannot be undone.', 'Warning')) {
-        //user confirmed delete
         const userId = user.id;
         const url = `/api/users/remove-user/${userId}`;
         axios.delete(url)
-            .then(response =>
-                //delete from the local state so Vue will reload list automatically
-                this.user.splice(index, 1).push(response.data))
+            .then(response => {
+              this.user.splice(index, 1);
+              alert('User deleted successfully!');
+              window.location.href = '/users'
+            })
             .catch(function (error) {
-              console.log(error)
+              console.log(error);
             });
       }
     },
+
     addUser: function (){
       const url = `/api/users/create-user`;
       axios.post(url,
