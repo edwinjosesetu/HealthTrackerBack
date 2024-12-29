@@ -32,28 +32,31 @@ val activities = arrayListOf<Activity>(
     Activity(id = 2, description = "Hopping", duration = 10.5, calories = 80, started = DateTime.now(), userId = 1),
     Activity(id = 3, description = "Walking", duration = 12.0, calories = 120, started = DateTime.now(), userId = 2)
 )
+//Used AI to generate this data
 val bmiTable = arrayListOf<Bmi>(
     Bmi(id = 1, userId = 1,  weight = 60.0, height = 168.0, bmiCalculation = 21.258503401360546, timestamp=DateTime.now()),
     Bmi(id = 2, userId = 2,  weight = 59.0, height = 154.0, bmiCalculation = 24.87771968291449, timestamp=DateTime.now()),
     Bmi(id = 3, userId = 3,  weight = 58.0, height = 150.0, bmiCalculation = 25.77777777777778, timestamp=DateTime.now())
 )
+//Used AI to generate this data
 val mealTable = arrayListOf<Meal>(
     Meal(id = 1, userId = 1, mealType = "Breakfast", foodItems = "Cereal", calories = 200.00, protein = 15.0, carbs = 25.0, fat = 5.0, loggedAt = DateTime.now()),
     Meal(id = 2, userId = 1, mealType = "Lunch", foodItems = "Grilled Chicken Salad", calories = 350.00, protein = 30.0, carbs = 10.0, fat = 15.0, loggedAt = DateTime.now()),
     Meal(id = 3, userId = 1, mealType = "Dinner", foodItems = "Steak with Mashed Potatoes", calories = 600.00, protein = 40.0, carbs = 50.0, fat = 20.0, loggedAt = DateTime.now())
 )
+//Used AI to generate this data
 val sleeps = arrayListOf<Sleep>(
     Sleep(id = 1, duration = 7.5, date = DateTime.now(), userId = 1),
     Sleep(id = 2, duration = 6.0, date = DateTime.now(), userId = 2),
     Sleep(id = 3, duration = 8.0, date = DateTime.now(), userId = 3)
 )
+//Used AI to generate this data
 val waters = arrayListOf<Water>(
     Water(id = 1, amount = 500.0F, date = DateTime.now(), userId = 1),
     Water(id = 2, amount = 750.0F, date = DateTime.now(), userId = 2),
     Water(id = 3, amount = 1000.0F, date = DateTime.now(), userId = 3)
 )
-
-
+//Used AI to generate this data
 fun populateUserTable(): UserDAO {
     SchemaUtils.create(Users)
     val userDAO = UserDAO()
