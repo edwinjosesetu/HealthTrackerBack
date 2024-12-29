@@ -1,0 +1,411 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Health Tracker API
+  description: This API provides endpoints for managing users, activities, login features, and BMI calculations.
+  contact:
+    name: Edwin Jose
+    email: mjedwin17@gmail.com
+paths:
+  /api/users:
+    get:
+      summary: Get all users
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /api/users/{user-id}:
+    get:
+      summary: Get a user by ID
+      operationId: getUserByUserId
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      summary: Update user details
+      operationId: updateUser
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully
+    delete:
+      summary: Delete a user by ID
+      operationId: deleteUserById
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '204':
+          description: User deleted successfully
+  /api/users/create-user:
+    post:
+      summary: Create a new user
+      operationId: addUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created successfully
+  /api/users/email/{email}:
+    get:
+      summary: Get user by email
+      operationId: getUserByEmail
+      parameters:
+        - in: path
+          name: email
+          description: User email
+          required: true
+          schema:
+            type: string
+            format: email
+            example: joe@example.com
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/users/register-user:
+    post:
+      summary: Register a new user
+      operationId: newUserRegister
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User registered successfully
+  /api/users/login-user:
+    post:
+      summary: Login user
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: User logged in successfully
+  /api/users/login-update/{user-id}:
+    put:
+      summary: Update user login details
+      operationId: updateUserLog
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: Login updated successfully
+  /api/users/login-delete/{user-id}:
+    delete:
+      summary: Delete user login
+      operationId: deleteUserLog
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '204':
+          description: Login deleted successfully
+  /api/activities:
+    get:
+      summary: Get all activities
+      operationId: getAllActivities
+      responses:
+        '200':
+          description: A list of activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Activity'
+  /api/add-activities:
+    post:
+      summary: Add a new activity
+      operationId: addActivity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activity'
+      responses:
+        '201':
+          description: Activity created successfully
+  /api/users/{user-id}/activities:
+    get:
+      summary: Get activities by user ID
+      operationId: getActivitiesByUserId
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '200':
+          description: User activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Activity'
+  /api/users/{user-id}/remove-activities:
+    delete:
+      summary: Delete all activities by user ID
+      operationId: deleteActivityByUserId
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '204':
+          description: Activities deleted successfully
+  /api/bmi:
+    get:
+      summary: Get all BMI records
+      operationId: getAllBmi
+      responses:
+        '200':
+          description: A list of BMI records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BMI'
+  /api/sleep:
+    get:
+      summary: Get all sleep records
+      operationId: getAllSleeps
+      responses:
+        '200':
+          description: A list of sleep records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sleep'
+  /api/sleep/add-sleep:
+    post:
+      summary: Add a new sleep record
+      operationId: addSleep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sleep'
+      responses:
+        '201':
+          description: Sleep record added successfully
+  /api/sleep/users/{user-id}:
+    get:
+      summary: Get sleep records by user ID
+      operationId: getSleepByUserId
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '200':
+          description: User sleep records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sleep'
+  /api/sleep/update-users/{id}:
+    patch:
+      summary: Update sleep record by ID
+      operationId: updateSleepById
+      parameters:
+        - in: path
+          name: id
+          description: Unique sleep record ID
+          required: true
+          schema:
+            type: integer
+            example: 5678
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sleep'
+      responses:
+        '200':
+          description: Sleep record updated successfully
+  /api/sleep/remove-user/{id}:
+    delete:
+      summary: Delete sleep record by ID
+      operationId: deleteSleepById
+      parameters:
+        - in: path
+          name: id
+          description: Unique sleep record ID
+          required: true
+          schema:
+            type: integer
+            example: 5678
+      responses:
+        '204':
+          description: Sleep record deleted successfully
+  /api/water:
+    get:
+      summary: Get all waters
+      operationId: getAllWaters
+      tags:
+        - Water
+      responses:
+        '200':
+          description: A list of waters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Water'
+  /api/water/add-water:
+    post:
+      summary: Add a new water resource
+      operationId: addWater
+      tags:
+        - Water
+      requestBody:
+        description: Water object to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Water'
+      responses:
+        '201':
+          description: Water resource added successfully
+  /api/water/{id}:
+    get:
+      summary: Get a water resource by ID
+      operationId: getWaterById
+      tags:
+        - Water
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A water resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Water'
+    patch:
+      summary: Update a water resource by ID
+      operationId: updateWaterById
+      tags:
+        - Water
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Water object to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Water'
+      responses:
+        '200':
+          description: Water resource updated successfully
+    delete:
+      summary: Delete a water resource by ID
+      operationId: deleteWaterById
+      tags:
+        - Water
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Water resource deleted successfully
+  /api/water/users/{user-id}:
+    get:
+      summary: Get water resources by user ID
+      operationId: getWaterByUserId
+      tags:
+        - Water
+      parameters:
+        - name: user-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of water resources for the user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Water'
+  /api/delete-water/{id}:
+    delete:
+      summary: Delete a water resource by ID
+      operationId: deleteWaterById
+      tags:
+        - Water
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Water resource deleted successfully
+  /api/delete-water/users/{user-id}:
+    delete:
+      summary: Delete water resources by user ID
+      operationId: deleteWaterByUserId
+      tags:
+        - Water
+      parameters:
+        - name: user-id
+          in: path
+         
